@@ -10,6 +10,20 @@
 // Keeping zen for process_args only
 #include "kaizen.h"
 
+// Simple timer replacement for zen::timer
+struct Timer {
+    std::chrono::high_resolution_clock::time_point start_time;
+    
+    void start() {
+        start_time = std::chrono::high_resolution_clock::now();
+    }
+    
+    double duration() const {  // Returns seconds
+        auto end_time = std::chrono::high_resolution_clock::now();
+        return std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time).count() / 1e9;
+    }
+};
+
 std::pair<int,int> process_args(int argc, char* argv[]) {
     zen::cmd_args args(argv, argc);
     auto size_options = args.get_options("--size");
@@ -31,10 +45,10 @@ double complex_process(int value) {
 }
 
 double complex_process_time(int value) {
-    zen::timer timer;
+    Timer timer;
     timer.start();
     complex_process(value);  // Time the function execution
-    return timer.duration<zen::timer::sec>().count(); // Return the time taken to execute
+    return timer.duration(); // Return the time taken to execute
 }
 
 int main(int argc, char* argv[]) {
@@ -42,12 +56,14 @@ int main(int argc, char* argv[]) {
     std::vector<int> numbers(size);
     std::vector<int> random_conditions(size);
     volatile double sum = 0;  // Changed to double for complex_process
-    zen::timer timer;
+    Timer timer;
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<int> dist(0, size);
 
     // Generate test data once
     for (int i = 0; i < size; i++) {
-        numbers[i] = zen::random_int(0,size);
-        random_conditions[i] = zen::random_int(0,size);
+        numbers[i] = dist(rng);
+        random_conditions[i] = dist(rng);
     }
 
     // Table header
@@ -67,7 +83,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    unpredictable_time = timer.duration<zen::timer::sec>().count();
+    unpredictable_time = timer.duration();
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Unpredictable (unsorted)", unpredictable_time, "seconds");
 
     // Predictable (unsorted)
@@ -80,7 +96,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    predictable_time = timer.duration<zen::timer::sec>().count();
+    predictable_time = timer.duration();
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Predictable (unsorted)", predictable_time, "seconds");
 
     // Predictable complex process (unsorted) - Remove execution time of the function
@@ -94,7 +110,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    predictable_complex_time = timer.duration<zen::timer::sec>().count() - total_complex_time; // Subtract function execution time
+    predictable_complex_time = timer.duration() - total_complex_time; // Subtract function execution time
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Predictable complex (unsorted)", predictable_complex_time, "seconds");
 
 
@@ -117,7 +133,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    sorted_unpredictable_time = timer.duration<zen::timer::sec>().count();
+    sorted_unpredictable_time = timer.duration();
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Unpredictable (sorted)", sorted_unpredictable_time, "seconds");
 
     // Predictable (sorted)
@@ -130,7 +146,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    sorted_predictable_time = timer.duration<zen::timer::sec>().count();
+    sorted_predictable_time = timer.duration();
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Predictable (sorted)", sorted_predictable_time, "seconds");
 
     // Predictable complex process (sorted) - Remove execution time of the function
@@ -144,7 +160,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    sorted_predictable_complex_time = timer.duration<zen::timer::sec>().count() - total_complex_time; // Subtract function execution time
+    sorted_predictable_complex_time = timer.duration() - total_complex_time; // Subtract function execution time
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "Predictable complex (sorted)", sorted_predictable_complex_time, "seconds");
     
     double sorted_unpredictable_complex_time;
@@ -157,7 +173,7 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    sorted_unpredictable_complex_time = timer.duration<zen::timer::sec>().count() - total_complex_time; // Subtract function execution time
+    sorted_unpredictable_complex_time = timer.duration() - total_complex_time; // Subtract function execution time
     std::cout << std::format("| {:<30} | {:>12.6f} | {:<9} |\n", "UnPredictable complex (sorted)", sorted_unpredictable_complex_time, "seconds");
 
     // Speedup factor (sorted)
