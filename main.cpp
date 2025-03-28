@@ -7,10 +7,9 @@
 #include <chrono>
 #include <random>
 #include <format>
-// Keeping zen for process_args only
-#include "kaizen.h"
+#include "kaizen.h" 
 
-// Simple timer replacement for zen::timer
+// not using zen::timer for smaller duration because it returns negative numbers
 struct Timer {
     std::chrono::high_resolution_clock::time_point start_time;
     
@@ -47,7 +46,7 @@ double complex_process(int value) {
 double complex_process_time(int value) {
     Timer timer;
     timer.start();
-    complex_process(value);  // Time the function execution
+    complex_process(value);  // Time the function execution to subtract 
     return timer.duration(); // Return the time taken to execute
 }
 
@@ -57,13 +56,11 @@ int main(int argc, char* argv[]) {
     std::vector<int> random_conditions(size);
     volatile double sum = 0;  // Changed to double for complex_process
     Timer timer;
-    std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<int> dist(0, size);
 
     // Generate test data once
     for (int i = 0; i < size; i++) {
-        numbers[i] = dist(rng);
-        random_conditions[i] = dist(rng);
+        numbers[i] = zen::random_int(0,size);
+        random_conditions[i] = zen::random_int(0,size);
     }
 
     // Table header
