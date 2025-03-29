@@ -51,7 +51,7 @@ Run the program with optional arguments to customize the vector size and number 
 ## Example Output
 
 Below is sample output from running the program with `--size 15000 --iter 5000`:
-
+NOTE that the optimization level also counts
 ```
  ================ Branch Prediction Timing Results ================
   Size: 15000  | Iterations: 5000
