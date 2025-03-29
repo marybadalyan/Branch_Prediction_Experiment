@@ -25,10 +25,7 @@ std::pair<int, int> process_args(int argc, char* argv[]) {
 
 // Simulate a computationally expensive function
 double complex_process(int value) {
-    double result = value;
-    for (int i = 0; i < 100; i++) {  // Simulate heavy work
-        result += std::sin(result) * std::cos(result);
-    }
+    double result = std::sin(value);
     return result;
 }
 
