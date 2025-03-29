@@ -61,25 +61,26 @@ Below is an example output from running the program with `--size 1000 --iter 100
 | Test Case                            |     Time (s) | Unit      |
 -------------------------------------------------------------------
 |            Unsorted Data             |              |           |
-| Unpredictable                        |     0.021663 | seconds   |
-| Predictable                          |     0.002017 | seconds   |
-| Percent Difference (Unpred - Pred)   |        90.69 | %         |
-| Predictable Complex                  |     0.027344 | seconds   |
-| Unpredictable Complex                |     0.032488 | seconds   |
-| Percent Difference (Unpred - Pred)   |        15.83 | %         |
+| Unpredictable                        |     0.019388 | seconds   |
+| Predictable                          |     0.001629 | seconds   |
+| Percent Difference (Unpred - Pred)   |        91.60 | %         |
+| Predictable Complex                  |     0.027455 | seconds   |
+| Unpredictable Complex                |     0.031455 | seconds   |
+| Percent Difference (Unpred - Pred)   |        12.72 | %         |
 -------------------------------------------------------------------
 |             Sorted Data              |              |           |
-| Unpredictable                        |     0.006389 | seconds   |
-| Predictable                          |     0.001134 | seconds   |
-| Percent Difference (Unpred - Pred)   |        82.25 | %         |
-| Predictable Complex                  |     0.024806 | seconds   |
-| Unpredictable Complex                |     0.028173 | seconds   |
-| Percent Difference (Unpred - Pred)   |        11.95 | %         |
+| Unpredictable                        |     0.006053 | seconds   |
+| Predictable                          |     0.001509 | seconds   |
+| Percent Difference (Unpred - Pred)   |        75.08 | %         |
+| Predictable Complex                  |     0.024397 | seconds   |
+| Unpredictable Complex                |     0.030032 | seconds   |
+| Percent Difference (Unpred - Pred)   |        18.76 | %         |
 -------------------------------------------------------------------
 |       Unsorted vs Sorted Data        |                          |
-| Percent Difference                   |        43.75 | %         |
-| Percent Difference complex           |         9.28 | %         |
+| Percent Difference                   |         7.40 | %         |
+| Percent Difference complex           |        11.14 | %         |
 -------------------------------------------------------------------
+
 ```
 
 ## Observations and Analysis

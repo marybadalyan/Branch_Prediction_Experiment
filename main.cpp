@@ -186,7 +186,7 @@ int main(int argc, char* argv[]) {
     warm_up(sum, size);
 
     // Pretty table header
-    zen::print("\n" + std::format("{:=^66}\n", " Branch Prediction Timing Results "));
+    zen::print("\n" ,std::format("{:=^66}\n", " Branch Prediction Timing Results "));
     zen::print(std::format("  Size: {:<6} | Iterations: {}\n", size, iter));
     zen::print(std::format("| {:<36} | {:>12} | {:<9} |\n", "Test Case", "Time (s)", "Unit"));
     zen::print(std::format("{:-<67}\n", ""));
@@ -194,19 +194,19 @@ int main(int argc, char* argv[]) {
 
     // Unsorted tests
     double unpredictable_time = run_unsorted_unpredictable(numbers, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable", unpredictable_time, "seconds"));
+    zen::print(zen::color::red(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable", unpredictable_time, "seconds")));
 
     double predictable_time = run_unsorted_predictable(numbers, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable", predictable_time, "seconds"));
+    zen::print(zen::color::green(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable", predictable_time, "seconds")));
 
     double percent_diff_unsorted = ((unpredictable_time - predictable_time) / unpredictable_time) * 100;
     zen::print(std::format("| {:<36} | {:>12.2f} | {:<9} |\n", "Percent Difference (Unpred - Pred)", percent_diff_unsorted, "%"));
 
     double predictable_complex_time = run_unsorted_predictable_complex(numbers, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable Complex", predictable_complex_time, "seconds"));
+    zen::print(zen::color::green(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable Complex", predictable_complex_time, "seconds")));
 
     double unpredictable_complex_time = run_unsorted_unpredictable_complex(numbers, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable Complex", unpredictable_complex_time, "seconds"));
+    zen::print(zen::color::red(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable Complex", unpredictable_complex_time, "seconds")));
 
     double percent_diff_complex_unsorted = ((unpredictable_complex_time - predictable_complex_time) / unpredictable_complex_time) * 100;
     zen::print(std::format("| {:<36} | {:>12.2f} | {:<9} |\n", "Percent Difference (Unpred - Pred)", percent_diff_complex_unsorted, "%"));
@@ -218,22 +218,22 @@ int main(int argc, char* argv[]) {
     // Sorted tests (using copies to preserve original unsorted data)
     std::vector<int> numbers_sorted = numbers; // Copy for sorted tests
     double sorted_unpredictable_time = run_sorted_unpredictable(numbers_sorted, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable", sorted_unpredictable_time, "seconds"));
+    zen::print(zen::color::red(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable", sorted_unpredictable_time, "seconds")));
 
     numbers_sorted = numbers; // Reset for next test
     double sorted_predictable_time = run_sorted_predictable(numbers_sorted, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable", sorted_predictable_time, "seconds"));
+    zen::print(zen::color::green(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable", sorted_predictable_time, "seconds")));
 
     double percent_diff_sorted = ((sorted_unpredictable_time - sorted_predictable_time) / sorted_unpredictable_time) * 100;
     zen::print(std::format("| {:<36} | {:>12.2f} | {:<9} |\n", "Percent Difference (Unpred - Pred)", percent_diff_sorted, "%"));
 
     numbers_sorted = numbers; // Reset for next test
     double sorted_predictable_complex_time = run_sorted_predictable_complex(numbers_sorted, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable Complex", sorted_predictable_complex_time, "seconds"));
+    zen::print(zen::color::green(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Predictable Complex", sorted_predictable_complex_time, "seconds")));
 
     numbers_sorted = numbers; // Reset for next test
     double sorted_unpredictable_complex_time = run_sorted_unpredictable_complex(numbers_sorted, iter, size, sum);
-    zen::print(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable Complex", sorted_unpredictable_complex_time, "seconds"));
+    zen::print(zen::color::red(std::format("| {:<36} | {:>12.6f} | {:<9} |\n", "Unpredictable Complex", sorted_unpredictable_complex_time, "seconds")));
 
     double percent_diff_complex_sorted = ((sorted_unpredictable_complex_time - sorted_predictable_complex_time) / sorted_unpredictable_complex_time) * 100;
     zen::print(std::format("| {:<36} | {:>12.2f} | {:<9} |\n", "Percent Difference (Unpred - Pred)", percent_diff_complex_sorted, "%"));
