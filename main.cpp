@@ -68,8 +68,8 @@ auto run_unsorted_predictable(const std::vector<int>& numbers, int iter, int siz
     return timer.duration<zen::timer::nsec>().count() / 1e9;
 }
 
-double run_unsorted_predictable_complex(const std::vector<int>& numbers, int iter, int size, volatile double& sum) {
-    double total_complex_time = 0.0;
+auto run_unsorted_predictable_complex(const std::vector<int>& numbers, int iter, int size, volatile double& sum) {
+    auto total_complex_time = 0.0;
     zen::timer timer;
     timer.start();
     for (int i = 0; i < iter; i++) {
@@ -105,7 +105,7 @@ auto run_unsorted_unpredictable_complex(const std::vector<int>& numbers, int ite
 }
 
 // Sorted test cases
-double run_sorted_unpredictable(std::vector<int>& numbers, int iter, int size, volatile auto& sum) {
+auto run_sorted_unpredictable(std::vector<int>& numbers, int iter, int size, volatile auto& sum) {
     std::sort(numbers.begin(), numbers.end());
     zen::timer timer;
     timer.start();
