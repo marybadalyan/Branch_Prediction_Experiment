@@ -45,6 +45,9 @@ auto run_unsorted_unpredictable(const std::vector<int>& numbers, int iter, int s
             if (zen::random_int(0, size) > numbers[j]) {
                 sum += numbers[j];
             }
+            else {
+                sum += numbers[size/2];
+            }
         }
     }
     timer.stop();
@@ -58,6 +61,9 @@ auto run_unsorted_predictable(const std::vector<int>& numbers, int iter, int siz
         for (int j = 0; j < size; j++) {
             if (size/2 > numbers[j]) {
                 sum += numbers[j];
+            }
+            else {
+                sum += numbers[size/2];
             }
         }
     }
@@ -75,6 +81,12 @@ auto run_unsorted_predictable_complex(const std::vector<int>& numbers, int iter,
                 zen::timer inner_timer;
                 inner_timer.start();
                 sum += complex_process(numbers[j]);
+                total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
+            }
+            else {
+                zen::timer inner_timer;
+                inner_timer.start();
+                sum += complex_process(numbers[size/2]);
                 total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
             }
         }
@@ -95,6 +107,12 @@ auto run_unsorted_unpredictable_complex(const std::vector<int>& numbers, int ite
                 sum += complex_process(numbers[j]);
                 total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
             }
+            else {
+                zen::timer inner_timer;
+                inner_timer.start();
+                sum += complex_process(numbers[size/2]);
+                total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
+            }
         }
     }
     timer.stop();
@@ -111,6 +129,9 @@ auto run_sorted_unpredictable(std::vector<int>& numbers, int iter, int size, vol
             if (zen::random_int(0, size) > numbers[j]) {
                 sum += numbers[j];
             }
+            else {
+                sum += numbers[size/2];
+            }
         }
     }
     timer.stop();
@@ -124,6 +145,9 @@ auto run_sorted_predictable(std::vector<int>& numbers, int iter, int size, volat
         for (int j = 0; j < size; j++) {
             if (size/2 > numbers[j]) {
                 sum += numbers[j];
+            }
+            else {
+                sum += numbers[size/2];
             }
         }
     }
@@ -144,6 +168,12 @@ auto run_sorted_predictable_complex(std::vector<int>& numbers, int iter, int siz
                 sum += complex_process(numbers[j]);
                 total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
             }
+            else {
+                zen::timer inner_timer;
+                inner_timer.start();
+                sum += complex_process(numbers[size/2]);
+                total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
+            }
         }
     }
     timer.stop();
@@ -161,6 +191,12 @@ auto run_sorted_unpredictable_complex(std::vector<int>& numbers, int iter, int s
                 zen::timer inner_timer;
                 inner_timer.start();
                 sum += complex_process(numbers[j]);
+                total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
+            } 
+            else {
+                zen::timer inner_timer;
+                inner_timer.start();
+                sum += complex_process(numbers[size/2]);
                 total_complex_time += inner_timer.elapsed<zen::timer::nsec>().count();
             }
         }
