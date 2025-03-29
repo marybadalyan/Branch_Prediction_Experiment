@@ -212,7 +212,7 @@ int main(int argc, char* argv[]) {
 
     // Generate test data once
     for (int i = 0; i < size; i++) {
-        numbers[i] = zen::random_int(0, size);
+        numbers[i] = zen::random_int(-size*2 , size*2);
     }
 
     // Warm-up to stabilize CPU state
