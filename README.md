@@ -55,30 +55,29 @@ Once compiled, run the program with optional arguments to specify the size of th
 
 Below is an example output from running the program with `--size 1000 --iter 1000`:
 
-```
-================ Branch Prediction Timing Results ================
-  Size: 1000   | Iterations: 1000
+``` ================ Branch Prediction Timing Results ================
+  Size: 5000   | Iterations: 1000
 | Test Case                            |     Time (s) | Unit      |
 -------------------------------------------------------------------
 |            Unsorted Data             |              |           |
-| Unpredictable                        |     0.019388 | seconds   |
-| Predictable                          |     0.001629 | seconds   |
-| Percent Difference (Unpred - Pred)   |        91.60 | %         |
-| Predictable Complex                  |     0.027455 | seconds   |
-| Unpredictable Complex                |     0.031455 | seconds   |
-| Percent Difference (Unpred - Pred)   |        12.72 | %         |
+| Unpredictable                        |     0.065123 | seconds   |
+| Predictable                          |     0.008988 | seconds   |
+| Percent Difference (Unpred - Pred)   |        86.20 | %         |
+| Predictable Complex                  |     0.129131 | seconds   |
+| Unpredictable Complex                |     0.155726 | seconds   |
+| Percent Difference (Unpred - Pred)   |        17.08 | %         |
 -------------------------------------------------------------------
 |             Sorted Data              |              |           |
-| Unpredictable                        |     0.006053 | seconds   |
-| Predictable                          |     0.001509 | seconds   |
-| Percent Difference (Unpred - Pred)   |        75.08 | %         |
-| Predictable Complex                  |     0.024397 | seconds   |
-| Unpredictable Complex                |     0.030032 | seconds   |
-| Percent Difference (Unpred - Pred)   |        18.76 | %         |
+| Unpredictable                        |     0.035168 | seconds   |
+| Predictable                          |     0.004723 | seconds   |
+| Percent Difference (Unpred - Pred)   |        86.57 | %         |
+| Predictable Complex                  |     0.112719 | seconds   |
+| Unpredictable Complex                |     0.146289 | seconds   |
+| Percent Difference (Unpred - Pred)   |        22.95 | %         |
 -------------------------------------------------------------------
 |       Unsorted vs Sorted Data        |                          |
-| Percent Difference                   |         7.40 | %         |
-| Percent Difference complex           |        11.14 | %         |
+| Percent Difference                   |        47.45 | %         |
+| Percent Difference complex           |        12.71 | %         |
 -------------------------------------------------------------------
 
 ```
